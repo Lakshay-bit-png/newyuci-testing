@@ -3,8 +3,23 @@
         "src" : "yuciTesting/wsgi.py",
         "use": "@vercel/python",
         "config":{"maxLambdaSize":"15mb", "runtime":"python3.9"}
-    }],
+    },
+    {
+        "src":"build files.sh",
+        "use": "@vercel/static-build",
+        "config": {
+        "distDir": "staticfiles build"
+    }
+}
+
+],
+
     "routes":[
+        {
+            "src": "/static/ (.*)",
+            "dest": "/static/$1"
+        },
+
         {
             "src":"/(.*)",
             "dest":"yuciTesting/wsgi.py"
